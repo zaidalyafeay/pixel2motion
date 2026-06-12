@@ -6,6 +6,12 @@ The skill combines vector reconstruction discipline with motion-design QA. It fi
 
 Use this repository when the request includes logo reveal, brand intro, animated SVG/HTML, motion studies, loading/idle/hover motion, or showcase HTML with playback controls. For static vectorization without motion, use the companion `pixel2svg-html` skill instead.
 
+## Project Preview
+
+[![Pixel2Motion project preview](docs/preview.png)](https://nolanlai.github.io/pixel2motion/)
+
+The interactive preview is published from `docs/index.html`. After pushing this repository to GitHub, enable GitHub Pages with source `main` / `docs`; the demo will be available at `https://nolanlai.github.io/pixel2motion/`.
+
 ## What It Produces
 
 - `logo.svg`: final static vector, structured for motion
@@ -88,7 +94,9 @@ python3 scripts/probe_motion_continuity.py logo_motion.html \
 ## GitHub Upload Checklist
 
 - Confirm `SKILL.md`, `agents/openai.yaml`, `references/`, and `scripts/` are committed.
+- Keep `docs/index.html` and `docs/preview.png` committed if the GitHub Pages preview should ship with the repository.
 - Keep generated logo deliverables, motion captures, local virtual environments, caches, and per-logo `outputs/` out of git.
+- Enable GitHub Pages from branch `main`, folder `/docs`, after the first push.
 - Add a `LICENSE` file before publishing if this repository should grant reuse rights.
 - After creating the GitHub repository, add the remote and push:
 
@@ -97,4 +105,3 @@ git remote add origin git@github.com:<owner>/pixel2motion.git
 git branch -M main
 git push -u origin main
 ```
-
