@@ -149,3 +149,23 @@ git remote add origin git@github.com:<owner>/pixel2motion.git
 git branch -M main
 git push -u origin main
 ```
+
+## More From Nolanlai
+
+<p align="center">
+  <a href="https://www.nolanlai.com">
+    <img src="docs/community/nolanlai-creative-tools.png" width="520" alt="Nolanlai's Creative Tools">
+  </a>
+  <br>
+  <a href="https://www.nolanlai.com"><strong>www.nolanlai.com</strong></a>
+  <br>
+  More creative tools, experiments, and notes from Nolanlai.
+</p>
+
+<p align="center">
+  <img src="docs/community/vibe-creators-wechat-qr.jpg" width="360" alt="Vibe-Creators WeChat group QR code">
+  <br>
+  <strong>Vibe-Creators 交流</strong>
+  <br>
+  Scan the QR code to join the creator community.
+</p>
