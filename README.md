@@ -1,12 +1,16 @@
 # Pixel2Motion
 
-Raster logo -> smooth SVG -> choreographed HTML motion.
+**Raster logo → smooth minimal SVG → choreographed HTML motion.**
 
-Pixel2Motion is a Codex skill for turning raster logos into clean, minimal vectors and then into branded motion systems. It fits the source with the lowest-complexity geometry that passes overlay QA, structures the SVG into named animation actors, and ships dependency-free HTML motion with browser evidence.
+[Live interactive demo](https://nolanlai.github.io/pixel2motion/) · [Skill instructions](SKILL.md) · [Companion skill: Pixel2SVG-HTML](https://github.com/nolanlai/pixel2svg-html)
 
-## Pixel To Motion Gallery
+Pixel2Motion is a Codex skill for turning raster logos into clean, minimal vectors and then into branded motion systems. It fits the source with the lowest-complexity geometry that passes overlay QA, structures the SVG into named animation actors, and ships dependency-free HTML motion with browser-rendered evidence, applying Disney's 12 principles of animation throughout.
 
-Pixel source images paired with Claude motion outputs rendered from `docs/index.html` at each animation's default speed: Horizon 1900ms, Continuum 2000ms, Focus 1700ms, N 2400ms, plus CueRecord at the page-default 0.65x custom timeline.
+Recommended review order: the motion gallery below, the interactive demo, the fitting evidence, and then the implementation workflow.
+
+## Pixel-to-Motion Gallery
+
+Each pairing shows the raster source next to the motion output, rendered from `docs/index.html` at the animation's default speed: Horizon 1900 ms, Continuum 2000 ms, Focus 1700 ms, N 2400 ms, and CueRecord at the page-default 0.65× custom timeline.
 
 <table>
   <tr>
@@ -53,32 +57,23 @@ Pixel source images paired with Claude motion outputs rendered from `docs/index.
   </tr>
 </table>
 
+## Interactive Demo
+
 [![Pixel2Motion project preview](docs/preview.png)](https://nolanlai.github.io/pixel2motion/)
 
-[Live interactive preview](https://nolanlai.github.io/pixel2motion/) · [Skill instructions](SKILL.md)
+The full interactive showcase is published from `docs/index.html`. After pushing to GitHub, enable GitHub Pages (branch `main`, folder `/docs`); the demo is then served at `https://nolanlai.github.io/pixel2motion/`.
 
-The README is ordered the way a reviewer should inspect the project: motion examples first, final interactive result second, fitting evidence third, then implementation workflow.
+## Fitting Evidence
 
-## Fitting Process
-
-CueRecord fitting evidence, read left to right:
+Every animation is authored against a QA-verified static vector. The CueRecord fitting sequence, read left to right:
 
 ![CueRecord overlay progress strip](docs/process/cuerecord-overlay-progress-strip.png)
 
-The teal overlays are QA checkpoints, not the deliverable. They show how the vector candidate is repeatedly compared against the raster source before motion is authored.
+The teal overlays are QA checkpoints, not the deliverable: the vector candidate is repeatedly compared against the raster source until mark scale, dot placement, wordmark baseline, and ink weight hold up — and only then is motion authored on top. The resulting clean semantic SVG, with mark, dot, and wordmark as separate addressable parts, becomes the final-frame contract for the animation.
 
-| Stage | What It Checks | Why It Matters |
-| --- | --- | --- |
-| Source raster | Mark shape, dot placement, wordmark baseline, spacing, and ink weight. | The animation can only be credible if the static target is visually faithful first. |
-| Early overlay | Coarse vector geometry over the source image. | Misalignment is visible immediately: mark scale, wordmark width, dot position, and baseline drift. |
-| Refinement overlays | Local geometry corrections while keeping the shape smooth. | The skill improves fit without falling back to noisy pixel-grid tracing. |
-| Final vector | Clean semantic SVG: mark, dot, and wordmark as separate addressable parts. | This becomes the final-frame contract for the animation. |
+Pixel2Motion optimizes IoU as a diagnostic, but smoothness and structure are the hard gates. A high-IoU jagged trace is rejected when a lower-complexity smooth vector explains the logo better. The static fitting methodology is documented in full in the companion [Pixel2SVG-HTML](https://github.com/nolanlai/pixel2svg-html) project.
 
-Pixel2Motion optimizes IoU as a diagnostic, but smoothness and structure are the hard gates. A high-IoU jagged trace is rejected when a lower-complexity smooth vector explains the logo better.
-
-The full interactive demo is published from `docs/index.html`. After pushing to GitHub, enable GitHub Pages with source `main` / `docs`; the preview will be available at `https://nolanlai.github.io/pixel2motion/`.
-
-## What It Produces
+## Deliverables
 
 - `logo.svg`: final static vector, structured for motion
 - `motion.css`: authored choreography targeting semantic SVG ids
@@ -158,7 +153,7 @@ If Chrome is not on the default path, set `CHROME_BIN` before running render che
 export CHROME_BIN="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 ```
 
-## Repository Contents
+## Repository Layout
 
 - `SKILL.md`: Codex-facing pixel-to-vector-to-motion workflow
 - `agents/openai.yaml`: UI metadata for the skill
@@ -166,7 +161,7 @@ export CHROME_BIN="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 - `scripts/`: helpers for tracing, rendering, overlays, path audits, showcase HTML generation, deterministic frame capture, and motion continuity probing
 - `docs/`: GitHub Pages demo, README preview images, GIFs, and fitting-process evidence
 
-## GitHub Upload Checklist
+## Publishing Checklist
 
 - Confirm `SKILL.md`, `agents/openai.yaml`, `references/`, `scripts/`, and `docs/` are committed.
 - Keep generated logo deliverables, motion captures, local virtual environments, caches, and per-logo `outputs/` out of git.
